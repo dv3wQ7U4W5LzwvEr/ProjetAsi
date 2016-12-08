@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="ear" name="asi2-tp-ear:ear">
+    <output-path>$PROJECT_DIR$/asi2-tp-ear/target</output-path>
+    <root id="archive" name="asi2-tp-ear.ear">
+      <element id="artifact" artifact-name="asi2-tp-ear:ear exploded" />
+    </root>
+  </artifact>
+</component>

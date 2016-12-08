@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="ejb-jar" name="asi2-tp-ejb:ejb">
+    <output-path>$PROJECT_DIR$/asi2-tp-ejb/target</output-path>
+    <root id="archive" name="asi2-tp-ejb.jar">
+      <element id="artifact" artifact-name="asi2-tp-ejb:ejb exploded" />
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="asi2-tp-web:war">
+    <output-path>$PROJECT_DIR$/asi2-tp-web/target</output-path>
+    <root id="archive" name="asi2-tp-web.war">
+      <element id="artifact" artifact-name="asi2-tp-web:war exploded" />
+    </root>
+  </artifact>
+</component>

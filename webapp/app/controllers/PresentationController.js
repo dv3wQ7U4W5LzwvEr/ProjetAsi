@@ -29,7 +29,7 @@ exports.loadPres = function (req, res) {
 exports.savePres = function (req, res) {
     
     var contentType = req.headers['content-type'];
-    console.log(contentType);
+
     if(!contentType || contentType.indexOf('application/json') !== 0) {
         res.end("Error: wrong content type");
         return;
