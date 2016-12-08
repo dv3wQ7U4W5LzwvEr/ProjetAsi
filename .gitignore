@@ -1,1 +1,7 @@
+## File-based project format
+*.ipr
+*.iws
+*.iml
+
+## Directory-based project format
 .idea/
