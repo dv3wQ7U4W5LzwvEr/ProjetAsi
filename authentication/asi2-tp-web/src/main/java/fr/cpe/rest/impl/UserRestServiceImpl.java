@@ -5,13 +5,8 @@ import fr.cpe.model.User;
 import fr.cpe.rest.IUserRestService;
 
 import javax.ejb.EJB;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
 import java.util.List;
 
-/**
- * Created by ubuntu on 9/24/16.
- */
 public class UserRestServiceImpl implements IUserRestService {
 
     @EJB

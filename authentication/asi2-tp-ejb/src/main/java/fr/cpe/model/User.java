@@ -2,13 +2,9 @@ package fr.cpe.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- * Created by ubuntu on 9/24/16.
- */
 @Entity
 @Table(name = "users")
 

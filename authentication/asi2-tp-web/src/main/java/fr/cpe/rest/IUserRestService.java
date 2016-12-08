@@ -5,9 +5,6 @@ import fr.cpe.model.User;
 import javax.ws.rs.*;
 import java.util.List;
 
-/**
- * Created by ubuntu on 9/11/16.
- */
 @Path("/users")
 public interface IUserRestService {
     @GET
