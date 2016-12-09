@@ -6,6 +6,7 @@ var express = require("express");
 var bodyParser = require('body-parser');
 var CONFIG = require("./config.json");
 process.env.CONFIG = JSON.stringify(CONFIG);
+var SlideModel = require('./app/models/slide.model.js');
 
 var defaultRoute = require("./app/routes/default.route.js");
 var presentationRoute = require("./app/routes/presentation.route.js");
@@ -22,3 +23,14 @@ app.use("/login", express.static(path.join(__dirname, "public/login")));
 
 var server = http.createServer(app);
 server.listen(CONFIG.port);
+
+var slid;
+SlideModel.read("37ba76b1-5c5d-47ef-8350-f4ea9407276d",function(error, slid){
+    if(slid)
+        console.log(slid);
+});
+// créé un slideModel à partir du Json
+// slideModel.create(slid);
+// slideModel.update(slid, callback);
+// slideModel.delete(id, callBack);
+
