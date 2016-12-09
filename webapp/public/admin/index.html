@@ -3,21 +3,19 @@
 
 <head>
     <title>Bootstrap 101 Template</title>
-    <link href="lib/bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/js.css" rel="stylesheet">
+    <link href="lib/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
     <div class="container-fluid fullScreenHeight zeroRef">
         <div class="row container-fluid fullScreenHeight ">
-
-            <!-- ************* LEFT PANEL *************-->
+            <!-- ************* LEFT PANEL ************* -->
             <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 zeroRef fullScreenHeight divOverflow">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
                     <div class="btn-group" role="group" aria-label="...">
                         <button type="button" class="btn btn-default">
-                            <span class="glyphicon glyphiconedit" aria-hidden="true"/>
+                            <span class="glyphicon glyphicon-edit" aria-hidden="true"/>
                         </button>
                     </div>
 
@@ -31,7 +29,7 @@
                         </button>
 
                         <button type="button" class="btn btn-default">
-                            <span class="glyphicon glyphiconremove" aria-hidden="true"/>
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"/>
                         </button>
                     </div>
 
@@ -42,12 +40,21 @@
                 </div>
                 <!-- TODO LATER -->
             </div>
+        </div>
 
-            <script src="lib/js/jquery-1.11.3.min.js"></script>
-            <script src="lib/js/angular.min.js"></script>
-            <script src="js/services/FactoryService.js"></script>
-            <script src="js/application/AdminApp.js"></script>
-            <script src="js/controllers/EventController.js"></script>
+        <ul ng-repeat="slide in currentPresentation.slidArray">
+            <li>
+                <h2>{{slide.title}}</h2>
+                <span>{{slide.txt}}</span>
+            </li>
+        </ul>
+    </div>
+
+    <script src="lib/jquery-3.1.1.min.js"></script>
+    <script src="lib/angular.min.js"></script>
+    <script src="js/application/AdminApp.js"></script>
+    <script src="js/services/FactoryService.js"></script>
+    <script src="js/controllers/EventController.js"></script>
 </body>
 
 </html>
