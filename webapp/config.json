@@ -1,5 +1,5 @@
 {
     "port": 1337,
-    "contentDirectory":"D:/Developpement/Web/Projet ASI/uploads",
-    "presentationDirectory":"D:/Developpement/Web/Projet ASI/presentation_content"
+    "contentDirectory":"D:/Developpement/Web/ProjetASI/webapp/uploads",
+    "presentationDirectory":"D:/Developpement/Web/ProjetASI/webapp/presentation_content"
 }
