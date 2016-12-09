@@ -1,5 +1,9 @@
 {
     "port": 1337,
-    "contentDirectory":"D:/Developpement/Web/Projet ASI/uploads",
-    "presentationDirectory":"D:/Developpement/Web/Projet ASI/presentation_content"
+    "contentDirectory":"/home/ubuntu/Documents/project/ProjetAsi/webapp/uploads",
+    "_COMMENT_contentDirectory":"D:/Developpement/Web/ProjetASI/webapp/uploads",
+    "explain":"contient les données et les métadonnées des slides comme les images",
+    "presentationDirectory":"/home/ubuntu/Documents/project/ProjetAsi/webapp/presentation_content",
+    "_COMMENT_presentationDirectory":"D:/Developpement/Web/ProjetASI/webapp/presentation_content",
+    "explain2":"contient les métadonnées en json"
 }

@@ -3,6 +3,7 @@
 var CONFIG = JSON.parse(process.env.CONFIG);
 var utils = require("../utils/utils.js");
 var fs = require("fs");
+var path = require("path");
 
 exports.loadPres = function (req, res) {
 
@@ -11,12 +12,12 @@ exports.loadPres = function (req, res) {
         var result = {};
 
         if(err) {
-            res.end("Error");
+            res.end("Erreur");
             return;
         }
 
         files.forEach(function (file) {
-            var data = fs.readFileSync(CONFIG.presentationDirectory+"\\"+file, "utf-8");
+            var data = fs.readFileSync(CONFIG.presentationDirectory + path.sep + file, "utf-8");
             var dataJson = JSON.parse(data);
             
             result[dataJson.id] = dataJson;
@@ -45,7 +46,7 @@ exports.savePres = function (req, res) {
         return;
     }
 
-    var filename = CONFIG.presentationDirectory + "\\" + req.body.id + ".pres.json";
+    var filename = CONFIG.presentationDirectory + path.sep + req.body.id + ".pres.json";
     fs.writeFile(filename, JSON.stringify(req.body), function(err) {
         if(err) res.end("Error: presentation not saved");
         else res.end("Presentation saved");
