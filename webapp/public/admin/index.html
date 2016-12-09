@@ -8,11 +8,10 @@
 
 <body>
     <div class="container-fluid fullScreenHeight zeroRef">
-        <div class="row container-fluid fullScreenHeight ">
+        <div class="row container-fluid fullScreenHeight">
             <!-- ************* LEFT PANEL ************* -->
             <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 zeroRef fullScreenHeight divOverflow">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-
                     <div class="btn-group" role="group" aria-label="...">
                         <button type="button" class="btn btn-default">
                             <span class="glyphicon glyphicon-edit" aria-hidden="true"/>
@@ -35,19 +34,36 @@
 
                     <div class="form-group">
                         <label for="currentPresTitle">Title</label>
-                        <input type="text" ng-model="currentPresenation.title" class="form-control" id="currentPresTitle">
+                        <input type="text" ng-model="currentPresentation.title" class="form-control" id="currentPresTitle">
                     </div>
                 </div>
-                <!-- TODO LATER -->
+                <ul class="list-unstyled" ng-repeat="slide in currentPresentation.slidArray">
+                    <li>
+                        <p>{{slide.title}}</p>
+                        <img class="img-responsive" src="{{'img/' + slide.contentMap[1] + '.png'}}" />
+                    </li>
+                </ul>
+            </div>
+
+            <!-- ************* CENTER PANEL *************-->
+            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7 zeroRef fullScreenHeight">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 fullScreenHeight">
+                    <div class="form-group">
+                        <label for="currentSlideTitle">Title</label>
+                        <input type="text" class="form-control" id="currentSlideTitle" ng-model="currentSlide.title">
+
+                        <label for="currentSlideText">Text</label>
+                        <input type="text" class="form-control" id="currentSlideText" ng-model="currentSlide.txt">
+                    </div>
+
+                    <img src="" ng-hide="isSlideContentEmpty()" />
+                    <h2 ng-show="isSlideContentEmpty()">NO IMAGE SET</h2>
+                </div>
             </div>
         </div>
-
-        <ul ng-repeat="slide in currentPresentation.slidArray">
-            <li>
-                <h2>{{slide.title}}</h2>
-                <span>{{slide.txt}}</span>
-            </li>
-        </ul>
     </div>
 
     <script src="lib/jquery-3.1.1.min.js"></script>
