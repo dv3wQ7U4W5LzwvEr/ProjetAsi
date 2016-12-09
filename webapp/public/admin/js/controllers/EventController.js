@@ -17,8 +17,14 @@ function eventCtrl($scope, factory) {
         $scope.currentSlide = slide;
     }
 
-    $scope.isSlideContentEmpty = function(slid) {
+    $scope.isSlideContentEmpty = function(slide) {
 
-        return slid.contentMap[1] == undefined;
+        return slide == undefined || slide.contentMap == undefined || slide.contentMap[1] == undefined;
+    }
+
+    $scope.getFirstSlideImagePath = function(slide) {
+
+        if($scope.isSlideContentEmpty(slide)) return "";
+        return 'img/' + slide.contentMap[1] + '.png';
     }
 }

@@ -4,6 +4,7 @@
 <head>
     <title>Bootstrap 101 Template</title>
     <link href="lib/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -37,15 +38,17 @@
                         <input type="text" ng-model="currentPresentation.title" class="form-control" id="currentPresTitle">
                     </div>
                 </div>
+
+                <!--************* SLIDE LIST *************-->
                 <ul class="list-unstyled" ng-repeat="slide in currentPresentation.slidArray">
-                    <li>
+                    <li ng-click="selectCurrentSlide(slide)">
                         <p>{{slide.title}}</p>
-                        <img class="img-responsive" src="{{'img/' + slide.contentMap[1] + '.png'}}" />
+                        <img ng-class="{slide_selected: currentSlide === slide}" class="img-responsive" src="{{getFirstSlideImagePath(slide)}}" />
                     </li>
                 </ul>
             </div>
 
-            <!-- ************* CENTER PANEL *************-->
+            <!--************* CENTER PANEL *************-->
             <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7 zeroRef fullScreenHeight">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
@@ -56,11 +59,11 @@
                         <input type="text" class="form-control" id="currentSlideTitle" ng-model="currentSlide.title">
 
                         <label for="currentSlideText">Text</label>
-                        <input type="text" class="form-control" id="currentSlideText" ng-model="currentSlide.txt">
+                        <textarea class="form-control" id="currentSlideText" ng-model="currentSlide.txt"></textarea>
                     </div>
 
-                    <img src="" ng-hide="isSlideContentEmpty()" />
-                    <h2 ng-show="isSlideContentEmpty()">NO IMAGE SET</h2>
+                    <img src="{{getFirstSlideImagePath(currentSlide)}}" ng-hide="isSlideContentEmpty(currentSlide)" class="img-responsive" />
+                    <h2 ng-show="isSlideContentEmpty(currentSlide)">NO IMAGE SET</h2>
                 </div>
             </div>
         </div>
