@@ -1,1 +1,1 @@
-angular.module("adminApp", ["factoryServices"]);
+angular.module("adminApp", ['ngDraggable', 'factoryServices', 'commServices']);

@@ -1,30 +1,79 @@
 angular.module("adminApp").controller("eventCtrl", eventCtrl);
 
-eventCtrl.$inject = ["$scope", "factory"];
+eventCtrl.$inject = ['$scope', '$log', '$window', 'factory', 'comm'];
 
-function eventCtrl($scope, factory) {
+function eventCtrl($scope, $log, $window, factory, comm) {
 
-    $scope.currentSlide = {}
-    $scope.currentPresentation = { "id": "efa0a79a-2f20-4e97-b0b7-71f824bfe349", "title": "nototo", "description": "Welcome to this first présentation do you need some help?", "slidArray": [{ "id": "c5c35356-1347-457d-af6b-e3d40862c1e0", "title": "slid1 - baxter data for ever", "txt": "The majority of sources for Odysseus' pre-war exploits—principally the mythographers Pseudo-Apollodorus and Hyginus—postdate Homer by many centuries. Two stories in particular are well known: When Helen was abducted, Menelaus called upon the other suitors to honour their oaths and help him to retrieve her, an attempt that would lead to the Trojan War.  TT", "contentMap": { "1": "37ba76b1-5c5d-47ef-8350-f4ea9407276d" } }, { "id": "ba5bd952-2688-46b8-9b01-33723e1e0cbd", "title": "slid2 -0123465679", "txt": "nothing to docvwcxv", "contentMap": { "1": "5095753f-14ca-4c1d-9236-52686ce9af4d" } }, { "id": "df17779e-6acf-4787-9066-41e94da5c1db", "title": "info about the world", "txt": "yesy some text here", "contentMap": { "1": "b4f0d8a7-aeaa-4f9b-abae-8f3187969b09" } }, { "id": "d561c71c-746c-41c5-9196-e56f75b5e94f", "title": "More than a simple presenter", "txt": "This is a EC Stratocaster", "contentMap": { "1": "d6aad8cd-b3dc-4794-9e2e-efee903a3f5e" } }] };
+    $scope.currentSlide = {};
+    $scope.currentPresentation = factory.presentationCreation("template_pres", "description of the template présentation");
 
-    $scope.newSlide = function() {
+    $scope.contentMap = {};
+    $scope.contentMap.payload = "";
 
-        $scope.currentPresentation = factoryServices.presentationCreation("Title", "Description");
+    $scope.presentationMap = {};
+    $scope.presentationMap.payload = "";
+
+    var available_content = comm.loadImages('test', 'test');
+    available_content.then(
+        function (payload) {
+            $scope.contentMap.payload = payload;
+            $scope.contentMap.array = factory.mapToArray(payload);
+        },
+        function (errorPayload) {
+            $log.error('failure loading images', errorPayload);
+        });
+
+    var firstPresentation = comm.loadPres('test', 'test');
+    firstPresentation.then(
+        function (payload) {
+            $scope.presentationMap.payload = payload;
+
+            for (key in $scope.presentationMap.payload)
+                $scope.currentPresentation = $scope.presentationMap.payload[key];
+        },
+        function (errorPayload) {
+            $log.error('failure loading presentation', errorPayload);
+        });
+
+    $scope.newSlide = function () {
+
+        var slid = factory.slidCreation("slide-Title", "slide-text");
+        $scope.currentPresentation.slidArray.push(slid);
     }
 
-    $scope.selectCurrentSlide = function(slide) {
+    $scope.selectCurrentSlide = function (slide) {
 
         $scope.currentSlide = slide;
     }
 
-    $scope.isSlideContentEmpty = function(slide) {
+    $scope.savePres = function () {
+
+        comm.savePres($scope.currentPresentation);
+    }
+
+    $scope.isSlideContentEmpty = function (slide) {
 
         return slide == undefined || slide.contentMap == undefined || slide.contentMap[1] == undefined;
     }
 
-    $scope.getFirstSlideImagePath = function(slide) {
+    $scope.getFirstSlideImagePath = function (slide) {
 
-        if($scope.isSlideContentEmpty(slide)) return "";
-        return 'img/' + slide.contentMap[1] + '.png';
+        if ($scope.isSlideContentEmpty(slide)) return "";
+        return slide.contentMap[1];
+    }
+
+    $scope.onDropComplete = function (data, evt) {
+
+        if ($scope.currentSlide == undefined) return;
+
+        $scope.currentSlide.contentMap[1] = data.src;
+        $scope.$apply();
+
+        console.log("drop success, data:", data);
+    }
+
+    $scope.onDragComplete = function (data, evt) {
+
+        console.log("drag success, data:", data);
     }
 }
