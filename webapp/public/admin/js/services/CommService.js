@@ -18,7 +18,7 @@ function commFnc($http, $q) {
             deferred.resolve({ '1': { 'src': './img/1.jpg', 'title': '1' }, '2': { 'src': './img/2.jpg', 'title': '2' }, '3': { 'src': './img/3.jpg', 'title': '3' } });
         }, 3000);*/
 
-        $http.get('/resources_list')
+        $http.get('/contents')
             .success(function (data, status, headers, config) { deferred.resolve(data); })
             .error(function (data, status, headers, config) { deferred.reject(status); });
 
@@ -54,7 +54,7 @@ function commFnc($http, $q) {
         socket.on('connection', function () {
             socket.emit('data_comm', { 'id': comm.io.uuid });
         });
-
+        
         socket.on('newPres', function (socket) {
 
         });

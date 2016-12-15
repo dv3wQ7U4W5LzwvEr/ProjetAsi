@@ -1,6 +1,7 @@
 "use strict";
 
 var CONFIG = JSON.parse(process.env.CONFIG);
+var utils = require("../utils/utils.js");
 var fs = require("fs");
 var path = require("path");
 
@@ -33,14 +34,14 @@ SlidModel.create = function (slid, callback) {
         var slidData = slid.getData();
         fs.writeFile(CONFIG.contentDirectory + path.sep + slid.fileName, slidData);
 
-        var metadataPath = CONFIG.contentDirectory + path.sep + slid.id + ".meta.json";
+        var metadataPath = utils.getMetaFilePath(slid.id);
         fs.writeFile(metadataPath, JSON.stringify(slid));
     }
 
 // Lit un fichier métadata et affiche les données dans la console
 SlidModel.read = function (id, callback) {
 
-        var metadataPath = CONFIG.contentDirectory + path.sep + id + ".meta.json";
+        var metadataPath = utils.getMetaFilePath(id);
         console.log("metadataPath" + metadataPath);
         fs.readFile(metadataPath, (err, data) => {
             if (err) {
@@ -55,7 +56,7 @@ SlidModel.read = function (id, callback) {
 SlidModel.update = function (slid, callback) {
 
         var slidData = slid.getData();
-        var metadataPath = CONFIG.contentDirectory + path.sep + slid.id + ".meta.json";
+        var metadataPath = utils.getMetaFilePath(slid.id);
 
         if(!slidData || slidData.length <= 0) {
             callback("Error updating metadata for id: " + slid.id);
@@ -67,8 +68,8 @@ SlidModel.update = function (slid, callback) {
 
 // Supprime le fichier de métadonnées et le fichier de presentation
 SlidModel.deletePres = function (id, callback) {
-        fs.unlink(CONFIG.presentationDirectory + path.sep + id + ".pres.json");
-        fs.unlink(CONFIG.contentDirectory + path.sep + slid.id + ".meta.json");
+        fs.unlink(utils.getPresentationFilePath(id));
+        fs.unlink(utils.getMetaFilePath(id));
     }
 
 module.exports = SlidModel; // déclaration de la classe

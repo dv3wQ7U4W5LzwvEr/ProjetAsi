@@ -42,6 +42,10 @@ this.getMetaFilePath = function (id) {
 	return path.join(CONFIG.contentDirectory, id + ".meta.json");
 }
 
+this.getPresentationFilePath = function (id) {
+	return path.join(CONFIG.presentationDirectory, id + ".pres.json");
+}
+
 this.getDataFilePath = function (fileName) {
 	return path.join(CONFIG.contentDirectory, fileName);
 }
