@@ -26,19 +26,22 @@ function SlidModel(slidModel) {
 }
 
 // méthodes static
+// A partir d'un slidModel, créé un fichier de metadonnée et enregistre la donnée 
+// présente dans un fichier 
 SlidModel.create = function (slid, callback) {
 
         var slidData = slid.getData();
-        fs.writeFile(slid.fileName, slidData);
+        fs.writeFile(CONFIG.contentDirectory + path.sep + slid.fileName, slidData);
 
         var metadataPath = CONFIG.contentDirectory + path.sep + slid.id + ".meta.json";
         fs.writeFile(metadataPath, JSON.stringify(slid));
     }
 
+// Lit un fichier métadata et affiche les données dans la console
 SlidModel.read = function (id, callback) {
 
         var metadataPath = CONFIG.contentDirectory + path.sep + id + ".meta.json";
-        console.log("toto" + metadataPath);
+        console.log("metadataPath" + metadataPath);
         fs.readFile(metadataPath, (err, data) => {
             if (err) {
                 callback("Error reading metadata for id: " + id);
@@ -48,6 +51,7 @@ SlidModel.read = function (id, callback) {
         });
     }
 
+// Prends un slidModel et mets à jour le fichier de métadonnées et la data
 SlidModel.update = function (slid, callback) {
 
         var slidData = slid.getData();
@@ -61,6 +65,7 @@ SlidModel.update = function (slid, callback) {
         fs.writeFile(metadataPath, JSON.stringify(slid));
     }
 
+// Supprime le fichier de métadonnées et le fichier de presentation
 SlidModel.deletePres = function (id, callback) {
         fs.unlink(CONFIG.presentationDirectory + path.sep + id + ".pres.json");
         fs.unlink(CONFIG.contentDirectory + path.sep + slid.id + ".meta.json");
