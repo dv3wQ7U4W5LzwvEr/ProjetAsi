@@ -18,6 +18,7 @@ exports.loadPres = function (req, res) {
 
         files.forEach(function (file) {
             var data = fs.readFileSync(CONFIG.presentationDirectory + path.sep + file, "utf-8");
+
             var dataJson = JSON.parse(data);
             
             result[dataJson.id] = dataJson;

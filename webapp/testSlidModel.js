@@ -4,9 +4,9 @@ var CONFIG = require("./config.json");
 process.env.CONFIG = JSON.stringify(CONFIG);
 
 var utils = require("./app/utils/utils.js");
-var SlidModel = require("./app/models/slid.model.js");
+var SlidModel = require("./app/models/content.model.js");
 
-var slid = new SlidModel();
+var slid = new ContentModel();
 
 slid.id = utils.generateUUID();
 slid.type = "myType";
@@ -72,7 +72,7 @@ function test4(slid) {
 
 function testErr(slid) {
 	console.log("====== TEST ERROR =======");
-	var slidTest = new SlidModel(12);
+	var slidTest = new ContentModel(12);
 	console.dir(slidTest);
 
 	test1(12);
