@@ -13,7 +13,7 @@ function eventCtrl($scope, $log, $window, factory, comm) {
     $scope.presentationMap = {};
     $scope.presentationMap.payload = "";
 
-    var available_content = comm.loadImages('test', 'test');
+    var available_content = comm.loadImages('', '');
     available_content.then(
         function (payload) {
             $scope.contentMap.payload = payload;
@@ -23,7 +23,7 @@ function eventCtrl($scope, $log, $window, factory, comm) {
             $log.error('failure loading images', errorPayload);
         });
 
-    var firstPresentation = comm.loadPres('test', 'test');
+    var firstPresentation = comm.loadPres('', '');
     firstPresentation.then(
         function (payload) {
             $scope.presentationMap.payload = payload;
@@ -56,24 +56,15 @@ function eventCtrl($scope, $log, $window, factory, comm) {
         return slide == undefined || slide.contentMap == undefined || slide.contentMap[1] == undefined;
     }
 
-    $scope.getFirstSlideImagePath = function (slide) {
-
-        if ($scope.isSlideContentEmpty(slide)) return "";
-        return slide.contentMap[1];
-    }
-
     $scope.onDropComplete = function (data, evt) {
 
         if ($scope.currentSlide == undefined) return;
 
         $scope.currentSlide.contentMap[1] = data.src;
         $scope.$apply();
-
-        console.log("drop success, data:", data);
     }
 
     $scope.onDragComplete = function (data, evt) {
 
-        console.log("drag success, data:", data);
     }
 }

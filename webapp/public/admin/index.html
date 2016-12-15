@@ -52,7 +52,7 @@
                         Slid Zone
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 slidZone" ng-class="{slidZoneSelected: slide.id == currentSlide.id, 'hide':isSlideContentEmpty(slide)}">
-                        <img ng-src="{{getFirstSlideImagePath(slide)}}" alt="{{contentMap.payload[slide.contentMap[1]].title}}" class="img-responsive">
+                        <img ng-src="/contents/{{contentMap.payload[slide.contentMap[1]].id}}" alt="{{contentMap.payload[slide.contentMap[1]].title}}" class="img-responsive">
                     </div>
                 </div>
             </div>
@@ -96,52 +96,52 @@
                     </div>
 
                     <div ng-drop="true" ng-drop-success="onDropComplete($data,$event)" style="min-height: 100px;min-width: 100px;">
-<img ng-src="{{getFirstSlideImagePath(currentSlide)}}" ng-hide="isSlideContentEmpty(currentSlide)" class="img-responsive"
-/>
-<h2 ng-show="isSlideContentEmpty(currentSlide)">NO IMAGE SET</h2>
-</div>
-</div>
-</div>
+                        <img ng-src="{{contentMap.payload[currentSlide.contentMap[1]].src}}" ng-hide="isSlideContentEmpty(currentSlide)" class="img-responsive"
+                        />
+                        <h2 ng-show="isSlideContentEmpty(currentSlide)">NO IMAGE SET</h2>
+                    </div>
+                </div>
+            </div>
 
-<!--************* RIGHT PANEL *************-->
-<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 divOverflow">
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search for..." ng-model="searchContent.title">
-            <span class="input-group-btn">
-                        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-            </span>
-        </div>
-    </div>
+            <!--************* RIGHT PANEL *************-->
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 divOverflow">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search for..." ng-model="searchContent.title">
+                        <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                        </span>
+                    </div>
+                </div>
 
-    <div id="dropZone" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <div ng-include="'pages/DropZoneArea.html'"></div>
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 contentBlock" ng-repeat="content in contentMap.array | filter:searchContent | orderBy: 'title'">
-            <input type="text" ng-model="content.title" class="form-control" id="currentContentTitle">
-            <div ng-drag="true" data-allow-transform="false" ng-drag-data="content" ng-drag-success="onDragComplete($data,$event)">
-                <img ng-src="{{content.src}}" alt="{{content.title}}" class="img-thumbnail" />
+                <div id="dropZone" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div ng-include="'pages/DropZoneArea.html'"></div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 contentBlock" ng-repeat="content in contentMap.array | filter:searchContent | orderBy: 'title'">
+                        <input type="text" ng-model="content.title" class="form-control" id="currentContentTitle">
+                        <div ng-drag="true" data-allow-transform="false" ng-drag-data="content" ng-drag-success="onDragComplete($data,$event)">
+                            <img ng-src="{{content.src}}" alt="{{content.title}}" class="img-thumbnail" />
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
-</div>
-</div>
 
-<script type="text/javascript" src="lib/jquery-3.1.1.min.js"></script>
-<script type="text/javascript" src="lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="lib/dropzone.js"></script>
-<script type="text/javascript" src="lib/angular.min.js"></script>
-<script type="text/javascript" src="lib/ngDraggable-master/ngDraggable.js"></script>
+    <script type="text/javascript" src="lib/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="lib/dropzone.js"></script>
+    <script type="text/javascript" src="lib/angular.min.js"></script>
+    <script type="text/javascript" src="lib/ngDraggable-master/ngDraggable.js"></script>
 
-<script type="text/javascript" src="js/application/AdminApp.js"></script>
-<script type="text/javascript" src="js/services/FactoryService.js"></script>
-<script type="text/javascript" src="js/services/CommService.js"></script>
+    <script type="text/javascript" src="js/application/AdminApp.js"></script>
+    <script type="text/javascript" src="js/services/FactoryService.js"></script>
+    <script type="text/javascript" src="js/services/CommService.js"></script>
 
-<script type="text/javascript" src="js/controllers/EventController.js"></script>
-<script type="text/javascript" src="js/controllers/PlayerController.js"></script>
-<script type="text/javascript" src="js/controllers/DropZoneController.js"></script>
+    <script type="text/javascript" src="js/controllers/EventController.js"></script>
+    <script type="text/javascript" src="js/controllers/PlayerController.js"></script>
+    <script type="text/javascript" src="js/controllers/DropZoneController.js"></script>
 
-<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
 </body>
 
 </html>
