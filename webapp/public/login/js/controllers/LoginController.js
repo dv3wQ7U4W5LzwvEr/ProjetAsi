@@ -19,7 +19,7 @@ function loginCrtFnt($scope, $log, $window, auth) {
                 if(successResult.role === "admin")
                     $window.location = "/admin";
                 else
-                    $window.location = "watch.html";
+                    $window.location = "/watch";
             }
             else {
                 alert("Connection Fail");

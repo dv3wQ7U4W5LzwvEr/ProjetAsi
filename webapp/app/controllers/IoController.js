@@ -2,7 +2,7 @@
 
 // Imports
 var utils = require("../utils/utils.js");
-var SlidModel = require("../models/slide.model.js");
+var ContentModel = require("../models/content.model.js");
 var io = require('socket.io');
 var fs = require("fs");
 
@@ -14,7 +14,7 @@ var currentSlideIndex;
 
 exports.listen = function (httpServer) {
 
-    io.listen(httpServer);
+    io = io.listen(httpServer);
 
     io.sockets.on('connection', function (socket) {
         socket.emit('connection', '');
@@ -100,7 +100,7 @@ function sendSlideToAll(slideIndex) {
     var currentSlide = currentPres.slidArray[currentSlideIndex];
 
     // Load slide content
-    SlidModel.read(currentSlide.id, function (err, slid) {
+    ContentModel.read(currentSlide.id, function (err, slid) {
         slid.src = "/contents/" + slid.id;
         sendToAll(slid);
     });
