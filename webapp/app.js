@@ -21,7 +21,8 @@ app.use(defaultRoute);
 app.use(presentationRoute);
 app.use(slidRoute);
 
-app.use("/login", express.static(path.join(__dirname, "public/login")));
+app.use("/login", express.static(path.join(__dirname, "public/login/")));
+app.use("/admin", express.static(path.join(__dirname, "public/admin/")));
 
 var server = http.createServer(app);
 server.listen(CONFIG.port);

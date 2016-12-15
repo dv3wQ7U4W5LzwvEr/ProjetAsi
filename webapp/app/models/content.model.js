@@ -46,7 +46,7 @@ ContentModel.create = function (content, callback) {
 ContentModel.read = function (id, callback) {
 
         var metadataPath = utils.getMetaFilePath(id);
-        console.log("metadataPath" + metadataPath);
+        
         fs.readFile(metadataPath, (err, data) => {
             if (err) {
                 callback("Error reading metadata for id: " + id);
