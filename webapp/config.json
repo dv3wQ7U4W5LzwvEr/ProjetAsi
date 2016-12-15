@@ -6,4 +6,8 @@
     "_COMMENT_presentationDirectory":"/home/ubuntu/Documents/project/ProjetAsi/webapp/presentation_content",
     "presentationDirectory":"D:/Developpement/Web/ProjetASI/webapp/presentation_content",
     "explain2":"contient les métadonnées en json"
+    "presentationDirectory":"/home/ubuntu/Documents/project/ProjetAsi/webapp/presentation_content",
+    "_COMMENT_presentationDirectory":"D:/Developpement/Web/ProjetASI/webapp/presentation_content",
+    "explain2":"contient les métadonnées en json",
+    "defaultPage":"/home/ubuntu/Documents/project/ProjetAsi/webapp/public/login/index.html"
 }

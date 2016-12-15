@@ -36,7 +36,10 @@ ContentModel.create = function (content, callback) {
         fs.writeFile(CONFIG.contentDirectory + path.sep + content.fileName, contentData);
 
         var metadataPath = utils.getMetaFilePath(content.id);
+        content.fileName = metadataPath;
         fs.writeFile(metadataPath, JSON.stringify(content));
+
+        callback(null, content);
     }
 
 // Lit un fichier métadata et affiche les données dans la console

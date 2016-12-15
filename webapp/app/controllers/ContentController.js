@@ -9,12 +9,12 @@ var ContentModel = require("./../models/content.model.js");
 // Retourne la liste des Contents
 exports.list = function (req, res) {
     console.log("ContentController.listFiles");
-    
+
     utils.listFiles(CONFIG.contentDirectory, "json", function (err, files) {
 
         var result = {};
 
-        if(err) {
+        if (err) {
             res.end("Erreur");
             return;
         }
@@ -22,7 +22,7 @@ exports.list = function (req, res) {
         files.forEach(function (file) {
             var data = fs.readFileSync(CONFIG.contentDirectory + path.sep + file, "utf-8");
             var dataJson = JSON.parse(data);
-            
+
             result[dataJson.id] = dataJson;
         }, this);
 
@@ -31,11 +31,20 @@ exports.list = function (req, res) {
 }
 
 // Créé la Content dont les informations sont dans la requête
+// nécessite header file -> pictures
+// nécessite header user -> x
 exports.create = function (req, res) {
     console.log("ContentController.create");
-    console.log(request.file.path);  // The full path to the uploaded file
-    console.log(request.file.originalname);  // Name of the file on the user's computer
-    console.log(request.file.mimetype);  // Mime type of the file
+
+    var toto;
+
+    toto.id = utiles.generateUUID();
+    toto.type = request.file.mimetype;
+    toto.title = request.file.originalname;
+    toto.fileName = request.file.path;
+    
+    ControlModel(toto);
+
     res.end();
 }
 
@@ -46,20 +55,23 @@ exports.getContent = function (req, res) {
     console.log("ContentController.getContent");
 
     var json = req.headers['json'];
-    
+
     var contentModel = fs.readFileSync(CONFIG.contentDirectory + path.sep + req.params.contentId + ".meta.json", "utf-8");
-    if (json){
+    if (json) {
         console.log("json == true");
-        ContentModel.read(req.params.contentId,function(error, content){
-            if(content)
+        ContentModel.read(req.params.contentId, function (error, content) {
+            if (content)
                 res.end(JSON.stringify(content));
-        });        
-    }else{
+        });
+    } else if (json == false) {
         console.log("json == false");
-        ContentModel.read(req.params.contentId,function(error, content){
-        if(content)
-            var data = fs.readFileSync(CONFIG.contentDirectory + path.sep + content.fileName);
+        ContentModel.read(req.params.contentId, function (error, content) {
+            if (content)
+                var data = fs.readFileSync(CONFIG.contentDirectory + path.sep + content.fileName);
             res.end(data);
-        });        
+        });
+    }
+    else {
+        res.end();
     }
 }
