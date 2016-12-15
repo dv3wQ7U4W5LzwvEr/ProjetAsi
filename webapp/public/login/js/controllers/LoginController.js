@@ -17,7 +17,7 @@ function loginCrtFnt($scope, $log, $window, auth) {
 
             if(successResult && successResult.validAuth) {
                 if(successResult.role === "admin")
-                    $window.location = "admin.html";
+                    $window.location = "/admin";
                 else
                     $window.location = "watch.html";
             }

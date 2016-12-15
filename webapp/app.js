@@ -26,11 +26,3 @@ app.use("/admin", express.static(path.join(__dirname, "public/admin/")));
 
 var server = http.createServer(app);
 server.listen(CONFIG.port);
-
-
-// Test de la fonction read
-var slid;
-ContentModel.read("37ba76b1-5c5d-47ef-8350-f4ea9407276d",function(error, slid){
-    if(slid)
-        console.log(slid);
-});

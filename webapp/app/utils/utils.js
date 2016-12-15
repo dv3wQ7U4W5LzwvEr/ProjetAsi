@@ -63,7 +63,7 @@ this.getFileType = function (fileType) {
 };
 
 this.listFiles = function (dir, fileType, callback) {
-	console.log("test");
+
 	fs.readdir(dir, function (err, files) {
 		if (err) {
 			callback("error");

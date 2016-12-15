@@ -7,5 +7,5 @@ module.exports = router;
 
 router.route("/")
     .get(function(req, res) {
-        res.sendFile(CONFIG.defaultPage);
+        res.redirect(CONFIG.defaultPage);
     });
