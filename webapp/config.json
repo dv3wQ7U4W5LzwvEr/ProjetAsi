@@ -1,11 +1,11 @@
 {
     "port": 1337,
-    "_COMMENT_contentDirectory": "/home/ubuntu/Documents/project/ProjetAsi/webapp/uploads",
-    "contentDirectory": "D:/Developpement/Web/ProjetASI/webapp/uploads",
+    "contentDirectory": "/home/ubuntu/Documents/project/ProjetAsi/webapp/uploads",
+    "_COMMENT_contentDirectory": "D:/Developpement/Web/ProjetASI/webapp/uploads",
     "explain": "contient les données et les métadonnées des slides comme les images",
-    "presentationDirectory": "D:/Developpement/Web/ProjetASI/webapp/presentation_content",
+    "presentationDirectory": "/home/ubuntu/Documents/project/ProjetAsi/webapp/presentation_content",
     "_COMMENT_presentationDirectory": "D:/Developpement/Web/ProjetASI/webapp/presentation_content",
     "explain2": "contient les métadonnées en json",
-    "defaultPage": "D:/Developpement/Web/ProjetASI/webapp/public/login/index.html",
-    "_COMMENT_defaultPage": "/home/ubuntu/Documents/project/ProjetAsi/webapp/public/login/index.html"
+    "_COMMENT_defaultPage": "D:/Developpement/Web/ProjetASI/webapp/public/login/index.html",
+    "defaultPage": "/home/ubuntu/Documents/project/ProjetAsi/webapp/public/login/index.html"
 }

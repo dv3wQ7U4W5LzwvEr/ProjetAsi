@@ -4,7 +4,7 @@ var CONFIG = require("./config.json");
 process.env.CONFIG = JSON.stringify(CONFIG);
 
 var utils = require("./app/utils/utils.js");
-var SlidModel = require("./app/models/content.model.js");
+var ContentModel = require("./app/models/content.model.js");
 
 var slid = new ContentModel();
 
@@ -14,13 +14,13 @@ slid.title = "myTitle";
 slid.fileName = slid.id + ".txt";
 slid.setData("It Works !");
 
-console.dir(SlidModel);
+console.dir(ContentModel);
 console.log("----------");
 console.dir(slid);
 
 function test1(slid) {
 	console.log("====== TEST 1 =======");
-	SlidModel.create(slid, function(err) {
+	ContentModel.create(slid, function(err) {
 		if (err) {
 			console.error(err);
 		} else {
@@ -31,7 +31,7 @@ function test1(slid) {
 
 function test2(slid) {
 	console.log("====== TEST 2 =======");
-	SlidModel.read(slid.id, function(err, data) {
+	ContentModel.read(slid.id, function(err, data) {
 		if (err) {
 			console.error(err);
 		} else {
@@ -46,7 +46,7 @@ function test3(slid) {
 	slid.title = "MOD_title";
 	slid.setData(slid.getData() + " YES,  IT IS !!!");
 
-	SlidModel.update(slid, function(err) {
+	ContentModel.update(slid, function(err) {
 		if (err) {
 			console.error(err);
 		} else {
@@ -59,7 +59,7 @@ function test3(slid) {
 function test4(slid) {
 	console.log("====== TEST 4 =======");
 
-	SlidModel.delete(slid.id, function(err) {
+	ContentModel.delete(slid.id, function(err) {
 		if (err) {
 			console.error(err);
 		} else {

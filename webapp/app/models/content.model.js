@@ -8,10 +8,12 @@ var path = require("path");
 function ContentModel(contentModel) {
 
     // attributs publiques
-    this.type = contentModel.type;
-    this.id = contentModel.id;
-    this.title = contentModel.title;
-    this.fileName = contentModel.fileName;
+    if(contentModel){
+        this.type = contentModel.type;
+        this.id = contentModel.id;
+        this.title = contentModel.title;
+        this.fileName = contentModel.fileName;
+    }
 
     // attributs privés
     var data;

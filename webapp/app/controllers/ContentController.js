@@ -57,13 +57,14 @@ exports.getContent = function (req, res) {
     var json = req.headers['json'];
 
     var contentModel = fs.readFileSync(CONFIG.contentDirectory + path.sep + req.params.contentId + ".meta.json", "utf-8");
-    if (json) {
+
+    if (JSON.stringify(json) == "\"true\"") {
         console.log("json == true");
         ContentModel.read(req.params.contentId, function (error, content) {
             if (content)
                 res.end(JSON.stringify(content));
         });
-    } else if (json == false) {
+    } else if (JSON.stringify(json) == "\"false\"") {
         console.log("json == false");
         ContentModel.read(req.params.contentId, function (error, content) {
             if (content)
