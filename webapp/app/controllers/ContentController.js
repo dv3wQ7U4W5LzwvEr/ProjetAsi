@@ -44,20 +44,21 @@ exports.create = function (req, res) {
 // soit le SlidModel au format JSON si on passe en paramètre   
 exports.getContent = function (req, res) {
     console.log("ContentController.getContent");
+
+    var json = req.headers['json'];
     
-    if (req.query.json == true){
+    var contentModel = fs.readFileSync(CONFIG.contentDirectory + path.sep + req.params.contentId + ".meta.json", "utf-8");
+    if (json){
         console.log("json == true");
-        var data = fs.readFileSync(CONFIG.contentDirectory + path.sep + req.query.id + "meta.json", "utf-8");
-        var dataJson = JSON.parse(data);
-        result[dataJson.id] = dataJson;
-        
-        res.end(JSON.stringify(result));
+        ContentModel.read(req.params.contentId,function(error, content){
+            if(content)
+                res.end(JSON.stringify(content));
+        });        
     }else{
         console.log("json == false");
-        var contentModel = fs.readFileSync(CONFIG.contentDirectory + path.sep + req.params.contentId + ".meta.json", "utf-8");
         ContentModel.read(req.params.contentId,function(error, content){
         if(content)
-            data = fs.readFileSync(CONFIG.contentDirectory + path.sep + content.fileName);
+            var data = fs.readFileSync(CONFIG.contentDirectory + path.sep + content.fileName);
             res.end(data);
         });        
     }
