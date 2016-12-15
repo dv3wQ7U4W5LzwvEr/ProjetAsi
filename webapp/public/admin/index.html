@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Bootstrap 101 Template</title>
+    <title>Admin</title>
 
     <link href="lib/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
@@ -60,13 +60,30 @@
             <!--************* CENTER PANEL *************-->
             <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7 zeroRef fullScreenHeight">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <div class="btn-group" role="group" aria-label="...">
-                        <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span></button>
-                        <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-backward" aria-hidden="true"></span></button>
-                        <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-play" aria-hidden="true"></span></button>
-                        <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-pause" aria-hidden="true"></span></button>
-                        <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-forward" aria-hidden="true"></span></button>
-                        <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span></button>
+                    <div class="btn-group" role="group" aria-label="..." ng-controller="playerCtrl as player" ng-init="player.initPlayer()">
+                        <button type="button" class="btn btn-default" ng-click="player.begin()">
+                            <span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span>
+                        </button>
+
+                        <button type="button" class="btn btn-default" ng-click="player.backward()">
+                            <span class="glyphicon glyphicon-backward" aria-hidden="true"></span>
+                        </button>
+
+                        <button type="button" class="btn btn-default" ng-click="player.play()">
+                            <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+                        </button>
+
+                        <button type="button" class="btn btn-default" ng-click="player.pause()">
+                            <span class="glyphicon glyphicon-pause" aria-hidden="true"></span>
+                        </button>
+
+                        <button type="button" class="btn btn-default" ng-click="player.forward()">
+                            <span class="glyphicon glyphicon-forward" aria-hidden="true"></span>
+                        </button>
+
+                        <button type="button" class="btn btn-default" ng-click="player.end()">
+                            <span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span>
+                        </button>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 fullScreenHeight">
@@ -79,49 +96,50 @@
                     </div>
 
                     <div ng-drop="true" ng-drop-success="onDropComplete($data,$event)" style="min-height: 100px;min-width: 100px;">
-                        <img ng-src="{{getFirstSlideImagePath(currentSlide)}}" ng-hide="isSlideContentEmpty(currentSlide)" class="img-responsive"/>
-                        <h2 ng-show="isSlideContentEmpty(currentSlide)">NO IMAGE SET</h2>
-                    </div>
-                </div>
-            </div>
+<img ng-src="{{getFirstSlideImagePath(currentSlide)}}" ng-hide="isSlideContentEmpty(currentSlide)" class="img-responsive"
+/>
+<h2 ng-show="isSlideContentEmpty(currentSlide)">NO IMAGE SET</h2>
+</div>
+</div>
+</div>
 
-            <!--************* RIGHT PANEL *************-->
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 divOverflow">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for..." ng-model="searchContent.title">
-                        <span class="input-group-btn">
+<!--************* RIGHT PANEL *************-->
+<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 divOverflow">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search for..." ng-model="searchContent.title">
+            <span class="input-group-btn">
                         <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-                        </span>
-                    </div>
-                </div>
-
-                <div id="dropZone" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <div ng-include="'pages/DropZoneArea.html'"></div>
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 contentBlock" ng-repeat="content in contentMap.array | filter:searchContent | orderBy: 'title'">
-                        <input type="text" ng-model="content.title" class="form-control" id="currentContentTitle">
-                        <div ng-drag="true" data-allow-transform="false" ng-drag-data="content" ng-drag-success="onDragComplete($data,$event)">
-                            <img ng-src="{{content.src}}" alt="{{content.title}}" class="img-thumbnail" />
-                        </div>
-                    </div>
-                </div>
-            </div>
+            </span>
         </div>
     </div>
 
-    <script src="lib/jquery-3.1.1.min.js"></script>
-    <script src="lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-    <script src="lib/dropzone.js"></script>
-    <script src="lib/angular.min.js"></script>
-    <script src="lib/ngDraggable-master/ngDraggable.js"></script>
+    <div id="dropZone" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div ng-include="'pages/DropZoneArea.html'"></div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 contentBlock" ng-repeat="content in contentMap.array | filter:searchContent | orderBy: 'title'">
+            <input type="text" ng-model="content.title" class="form-control" id="currentContentTitle">
+            <div ng-drag="true" data-allow-transform="false" ng-drag-data="content" ng-drag-success="onDragComplete($data,$event)">
+                <img ng-src="{{content.src}}" alt="{{content.title}}" class="img-thumbnail" />
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
 
-    <script src="js/application/AdminApp.js"></script>
-    <script src="js/services/FactoryService.js"></script>
-    <script src="js/services/CommService.js"></script>
+<script src="lib/jquery-3.1.1.min.js"></script>
+<script src="lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script src="lib/dropzone.js"></script>
+<script src="lib/angular.min.js"></script>
+<script src="lib/ngDraggable-master/ngDraggable.js"></script>
 
-    <script src="js/controllers/EventController.js"></script>
-    <script src="js/controllers/PlayerController.js"></script>
-    <script src="js/controllers/DropZoneController.js"></script>
+<script src="js/application/AdminApp.js"></script>
+<script src="js/services/FactoryService.js"></script>
+<script src="js/services/CommService.js"></script>
+
+<script src="js/controllers/EventController.js"></script>
+<script src="js/controllers/PlayerController.js"></script>
+<script src="js/controllers/DropZoneController.js"></script>
 </body>
 
 </html>
