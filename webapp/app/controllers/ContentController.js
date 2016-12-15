@@ -42,7 +42,7 @@ exports.create = function (req, res) {
     toto.type = request.file.mimetype;
     toto.title = request.file.originalname;
     toto.fileName = request.file.path;
-    
+
     ControlModel(toto);
 
     res.end();
@@ -50,29 +50,36 @@ exports.create = function (req, res) {
 
 // Retourne la Content avec l'ID correspondante
 // soit la slide (le contenu du fichier de données)
-// soit le SlidModel au format JSON si on passe en paramètre   
+// soit le SlidModel au format JSON si on passe en paramètre ?json=true'  
 exports.getContent = function (req, res) {
     console.log("ContentController.getContent");
 
-    var json = req.headers['json'];
-
-    var contentModel = fs.readFileSync(CONFIG.contentDirectory + path.sep + req.params.contentId + ".meta.json", "utf-8");
-
-    if (JSON.stringify(json) == "\"true\"") {
-        console.log("json == true");
+    if (req.query.json == "true") {
         ContentModel.read(req.params.contentId, function (error, content) {
-            if (content)
-                res.end(JSON.stringify(content));
-        });
-    } else if (JSON.stringify(json) == "\"false\"") {
-        console.log("json == false");
-        ContentModel.read(req.params.contentId, function (error, content) {
-            if (content)
-                var data = fs.readFileSync(CONFIG.contentDirectory + path.sep + content.fileName);
-            res.end(data);
+            if (error) {
+                res.end(error);
+                return;
+            }
+
+            res.end(JSON.stringify(content));
         });
     }
     else {
-        res.end();
+        // Read metadata file
+        ContentModel.read(req.params.contentId, function (error, content) {
+            if (error) {
+                res.end(error);
+                return;
+            }
+
+            // Load image file
+            fs.readFile(utils.getDataFilePath(content.fileName), function (err, content) {
+                if(err) {
+                    res.end("Error reading image file: " + err);
+                }
+
+                res.end(content, 'binary');
+            });
+        });
     }
 }

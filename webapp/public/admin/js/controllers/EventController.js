@@ -58,9 +58,9 @@ function eventCtrl($scope, $log, $window, factory, comm) {
 
     $scope.onDropComplete = function (data, evt) {
 
-        if ($scope.currentSlide == undefined) return;
+        if ($scope.currentSlide === undefined || $scope.currentSlide.contentMap === undefined) return;
 
-        $scope.currentSlide.contentMap[1] = data.src;
+        $scope.currentSlide.contentMap[1] = data.id;
         $scope.$apply();
     }
 

@@ -44,14 +44,15 @@ ContentModel.create = function (content, callback) {
         callback(null, content);
     }
 
-// Lit un fichier métadata et affiche les données dans la console
+// Lit un fichier métadata et renvoi un objet ContentModel
 ContentModel.read = function (id, callback) {
 
         var metadataPath = utils.getMetaFilePath(id);
-        
+     
         fs.readFile(metadataPath, (err, data) => {
             if (err) {
                 callback("Error reading metadata for id: " + id);
+                return;
             }
 
             callback(null, new ContentModel(JSON.parse(data)));

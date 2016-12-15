@@ -1,5 +1,5 @@
-// user.route.js
 "use strict";
+
 var  express  =  require("express");
 var  router  =  express.Router();
 var  multer  =  require("multer");  // nécessite npm i multer
@@ -15,6 +15,5 @@ router.route('/contents')
 
 router.route('/contents/:contentId')
   .get(contentController.getContent);
-
 
 module.exports  =  router;

@@ -96,7 +96,7 @@
                     </div>
 
                     <div ng-drop="true" ng-drop-success="onDropComplete($data,$event)" style="min-height: 100px;min-width: 100px;">
-                        <img ng-src="{{contentMap.payload[currentSlide.contentMap[1]].src}}" ng-hide="isSlideContentEmpty(currentSlide)" class="img-responsive"
+                        <img ng-src="/contents/{{contentMap.payload[currentSlide.contentMap[1]].id}}" ng-hide="isSlideContentEmpty(currentSlide)" class="img-responsive"
                         />
                         <h2 ng-show="isSlideContentEmpty(currentSlide)">NO IMAGE SET</h2>
                     </div>
@@ -119,7 +119,7 @@
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 contentBlock" ng-repeat="content in contentMap.array | filter:searchContent | orderBy: 'title'">
                         <input type="text" ng-model="content.title" class="form-control" id="currentContentTitle">
                         <div ng-drag="true" data-allow-transform="false" ng-drag-data="content" ng-drag-success="onDragComplete($data,$event)">
-                            <img ng-src="{{content.src}}" alt="{{content.title}}" class="img-thumbnail" />
+                            <img ng-src="/contents/{{content.id}}" alt="{{content.title}}" class="img-thumbnail" />
                         </div>
                     </div>
                 </div>
