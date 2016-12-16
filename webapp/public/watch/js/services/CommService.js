@@ -14,7 +14,7 @@ function commFnc() {
         });
 
         socket.on('currentSlidEvent', function (socket) {
-            console.log("Receive slide : " + socket);
+            console.log("Receive slide : " + JSON.stringify(socket));
             scope.onCurrentSlide(socket);
         });
 

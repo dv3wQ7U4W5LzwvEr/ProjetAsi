@@ -12,6 +12,7 @@ function watchCrtFnt($scope, comm) {
     $scope.onCurrentSlide = function (data) {
 
         $scope.currentSlide = data;
+        $scope.$apply();
     }
 
     function generateUUID () {

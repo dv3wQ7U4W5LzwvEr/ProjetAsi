@@ -20,9 +20,9 @@ exports.listen = function (httpServer) {
         console.log("Client connecting...");
         socket.emit('connection', '');
 
-        socket.on('data_comm', function (socket) {
-            console.log("Client connected: "+JSON.stringify(socket));
-            mapUser[socket.id] = socket;
+        socket.on('data_comm', function (data) {
+            console.log("Client connected : " + data.id);
+            mapUser[data.id] = socket;
         });
 
         socket.on('slidEvent', function (data) {
@@ -48,7 +48,7 @@ function onSlideEvent(data) {
                 return undefined;
             }
 
-            sendSlideToAll(currentPres.slidArray.length);
+            sendSlideToAll(currentPres.slidArray.length - 1);
             break;
         case "BEGIN":
             sendSlideToAll(0);
@@ -75,15 +75,15 @@ function startPresentation(presId) {
         // Init current presentation
         currentPres = JSON.parse(data);
         currentSlideIndex = 0;
+        sendSlideToAll(currentSlideIndex);
 
         // Start presentation
         if (timer != null)
             clearInterval(timer);
 
         timer = setInterval(function () {
-            sendSlideToAll(currentSlideIndex);
-            currentSlideIndex++;
-        }, 5000);
+            sendSlideToAll(currentSlideIndex + 1);
+        }, 2000);
     });
 }
 
@@ -99,10 +99,16 @@ function sendSlideToAll(slideIndex) {
     else
         return;
 
+    console.log("Current slide index : " + currentSlideIndex);
     var currentSlide = currentPres.slidArray[currentSlideIndex];
 
     // Load slide content
-    ContentModel.read(currentSlide.id, function (err, slid) {
+    ContentModel.read(currentSlide.contentMap[1], function (err, slid) {
+        
+        if(err) {
+            console.log("Error loading slide metadata : " + slid);    
+        }
+
         slid.src = "/contents/" + slid.id;
         sendToAll(slid);
     });
@@ -111,8 +117,7 @@ function sendSlideToAll(slideIndex) {
 // Send data to every sockets
 function sendToAll(data) {
 
-    console.log("Send all : " + data);
-    mapUser.forEach(function (socket) {
-        socket.emit("currentSlidEvent", data);
+    Object.keys(mapUser).forEach(function (key){
+        mapUser[key].emit("currentSlidEvent", data);
     });
 }
