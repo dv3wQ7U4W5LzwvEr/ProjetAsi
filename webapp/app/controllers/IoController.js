@@ -10,22 +10,25 @@ var fs = require("fs");
 var mapUser = {};
 var timer = null;
 var currentPres;
-var currentSlideIndex;
+var currentSlideIndex = 0;
 
 exports.listen = function (httpServer) {
 
     io = io.listen(httpServer);
 
-    io.sockets.on('connection', function (socket) {
+    io.on('connection', function (socket) {
+        console.log("Client connecting...");
         socket.emit('connection', '');
-    });
 
-    io.sockets.on('data_comm', function (socket) {
-        mapUser[socket.id] = io.sockets;
-    });
+        socket.on('data_comm', function (socket) {
+            console.log("Client connected: "+JSON.stringify(socket));
+            mapUser[socket.id] = socket;
+        });
 
-    io.sockets.on('slidEvent', function (socket) {
-        onSlideEvent(socket);
+        socket.on('slidEvent', function (data) {
+            console.log("Slide event : " + JSON.stringify(data));
+            onSlideEvent(data);
+        });
     });
 }
 
@@ -62,16 +65,15 @@ function onSlideEvent(data) {
 function startPresentation(presId) {
 
     var presPath = utils.getPresentationFilePath(presId);
-
+    
     fs.readFile(presPath, function (err, data) {
-
         if (err) {
             console.log("Error reading presentation : " + err);
             return;
         }
 
         // Init current presentation
-        currentPres = data;
+        currentPres = JSON.parse(data);
         currentSlideIndex = 0;
 
         // Start presentation
@@ -87,7 +89,7 @@ function startPresentation(presId) {
 
 function sendSlideToAll(slideIndex) {
 
-    if (currentPres === undefined || currentPres.slidArray === undefined) {
+    if (currentPres == undefined || currentPres.slidArray == undefined) {
         console.log("Error: no presentation loaded");
         return;
     }
@@ -95,7 +97,7 @@ function sendSlideToAll(slideIndex) {
     if (slideIndex >= 0 && slideIndex < currentPres.slidArray.length)
         currentSlideIndex = slideIndex;
     else
-        return; 
+        return;
 
     var currentSlide = currentPres.slidArray[currentSlideIndex];
 
@@ -109,7 +111,8 @@ function sendSlideToAll(slideIndex) {
 // Send data to every sockets
 function sendToAll(data) {
 
+    console.log("Send all : " + data);
     mapUser.forEach(function (socket) {
-        socket.emit("slidEvent", data);
+        socket.emit("currentSlidEvent", data);
     });
 }

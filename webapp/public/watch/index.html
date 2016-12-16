@@ -3,17 +3,24 @@
 
 <head>
     <title>Watcher</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
 </head>
 
-<body>
+<body ng-init="initComm()">
+    <div class="container-fluid fullScreenHeight zeroRef">
+        <img ng-src="{{currentSlide.src}}" alt="currentSlide.title"/>
+        <p>{{currentSlide.title}}</p> <!-- TODO: Afficher la description du slide ici -->
+    </div>
 
-    <script src="lib/jquery-3.1.1.min.js"></script>
-    <script src="lib/bootstrap.min.js"></script>
-    <script src="lib/angular.min.js"></script>
+    <script type="text/javascript" src="lib/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="lib/angular.min.js"></script>
+    
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
 
-    <script src="js/application/WatchApp.js"></script>
-    <script src="js/controllers/WatchController.js"></script>
+    <script type="text/javascript" src="js/application/WatchApp.js"></script>
+    <script type="text/javascript" src="js/controllers/WatchController.js"></script>
+    <script type="text/javascript" src="js/services/CommService.js"></script>
 </body>
 
 </html>

@@ -28,7 +28,7 @@ function playerCtrl($scope, comm, factory) {
         comm.io.emitNext($scope.socket);
     }
 
-    this.play = function () {
-        comm.io.emitStart($scope.socket);
+    this.play = function (presId) {
+        comm.io.emitStart($scope.socket, presId);
     }
 }
