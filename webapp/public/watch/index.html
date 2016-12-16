@@ -3,22 +3,26 @@
 
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <title>Watcher</title>
-    
+
     <link rel="stylesheet" href="lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <link href="css/style.css" rel="stylesheet">
 </head>
 
 <body ng-init="initComm()">
     <div class="container-fluid fullScreenHeight zeroRef">
-        <img ng-src="{{currentSlide.src}}" alt="currentSlide.title"/>
-        <p>{{currentSlide.title}}</p> <!-- TODO: Afficher la description du slide ici -->
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 nopadding" ng-show="currentSlide.src">
+            <img ng-src="{{currentSlide.src}}" alt="currentSlide.title" class="img-responsive center-block" />
+            <h1 class="slideLegend">{{currentSlide.title}}</h1>
+        </div>
     </div>
 
     <script type="text/javascript" src="lib/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" src="lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="lib/angular.min.js"></script>
-    
+
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
 
     <script type="text/javascript" src="js/application/WatchApp.js"></script>

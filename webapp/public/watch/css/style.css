@@ -1,0 +1,28 @@
+html, body {
+    height: 100%;
+    padding: 0px;
+    margin: 0px;
+    overflow-x: hidden;
+}
+
+.zeroRef {
+    padding: 0px;
+    margin: 0px;
+}
+
+.fullScreenHeight {
+    height: 100%;
+}
+
+.slideLegend {
+    color: black;
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+    margin: 0;
+}
+
+.nopadding {
+    padding: 0 !important;
+    margin: 0 !important;
+}

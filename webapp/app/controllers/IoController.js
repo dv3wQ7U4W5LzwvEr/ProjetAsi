@@ -85,6 +85,10 @@ function startPresentation(presId) {
         // Start presentation
         timer = setInterval(function () {
             sendSlideToAll(currentSlideIndex + 1);
+
+            // Stop the timer if we reach the end
+            if(currentSlideIndex + 1 >= currentPres.slidArray.length)
+                clearInterval(timer);
         }, 2000);
     });
 }
