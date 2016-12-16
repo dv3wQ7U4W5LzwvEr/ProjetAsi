@@ -21,21 +21,21 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <div class="btn-group" role="group" aria-label="...">
                         <button type="button" class="btn btn-default">
-                            <span class="glyphicon glyphicon-edit" aria-hidden="true"/>
+                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                         </button>
                     </div>
 
                     <div class="btn-group" role="group" aria-label="...">
                         <button type="button" class="btn btn-default" ng-click="savePres()">
-                            <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"/>
+                            <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
                         </button>
 
                         <button type="button" class="btn btn-default" ng-click="newSlide()">
-                            <span class="glyphicon glyphicon-plus" aria-hidden="true"/>
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                         </button>
 
                         <button type="button" class="btn btn-default">
-                            <span class="glyphicon glyphicon-remove" aria-hidden="true"/>
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                         </button>
                     </div>
 
@@ -96,8 +96,7 @@
                     </div>
 
                     <div ng-drop="true" ng-drop-success="onDropComplete($data,$event)" style="min-height: 100px;min-width: 100px;">
-                        <img ng-src="/contents/{{contentMap.payload[currentSlide.contentMap[1]].id}}" ng-hide="isSlideContentEmpty(currentSlide)" class="img-responsive"
-                        />
+                        <img ng-src="/contents/{{contentMap.payload[currentSlide.contentMap[1]].id}}" ng-hide="isSlideContentEmpty(currentSlide)" class="img-responsive" alt="{{currentSlide.title}}"/>
                         <h2 ng-show="isSlideContentEmpty(currentSlide)">NO IMAGE SET</h2>
                     </div>
                 </div>
@@ -109,7 +108,9 @@
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="Search for..." ng-model="searchContent.title">
                         <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                            <button class="btn btn-default" type="button">
+                                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                            </button>
                         </span>
                     </div>
                 </div>

@@ -1,14 +1,16 @@
 "use strict";
 
 var CONFIG = JSON.parse(process.env.CONFIG);
+
 var utils = require("../utils/utils.js");
+
 var fs = require("fs");
 var path = require("path");
 
 function ContentModel(contentModel) {
 
     // attributs publiques
-    if(contentModel){
+    if (contentModel) {
         this.type = contentModel.type;
         this.id = contentModel.id;
         this.title = contentModel.title;
@@ -19,7 +21,7 @@ function ContentModel(contentModel) {
     var data;
 
     // méthodes publiques
-    this.getData = function(){
+    this.getData = function () {
         return data;
     }
 
@@ -34,49 +36,50 @@ function ContentModel(contentModel) {
 // présente dans un fichier 
 ContentModel.create = function (content, callback) {
 
-        var contentData = content.getData();
-        fs.writeFile(CONFIG.contentDirectory + path.sep + content.fileName, contentData);
+    var contentData = content.getData();
+    fs.writeFile(utils.getDataFilePath(content.fileName), contentData);
 
-        var metadataPath = utils.getMetaFilePath(content.id);
-        content.fileName = metadataPath;
-        fs.writeFile(metadataPath, JSON.stringify(content));
+    var metadataPath = utils.getMetaFilePath(content.id);
+    content.fileName = metadataPath;
+    fs.writeFile(metadataPath, JSON.stringify(content));
 
-        callback(null, content);
-    }
+    callback(null, content);
+}
 
 // Lit un fichier métadata et renvoi un objet ContentModel
 ContentModel.read = function (id, callback) {
 
-        var metadataPath = utils.getMetaFilePath(id);
-     
-        fs.readFile(metadataPath, (err, data) => {
-            if (err) {
-                callback("Error reading metadata for id: " + id);
-                return;
-            }
+    var metadataPath = utils.getMetaFilePath(id);
 
-            callback(null, new ContentModel(JSON.parse(data)));
-        });
-    }
+    fs.readFile(metadataPath, (err, data) => {
+        if (err) {
+            callback("Error reading metadata for id: " + id);
+            return;
+        }
+
+        callback(null, new ContentModel(JSON.parse(data)));
+    });
+}
 
 // Prends un contentModel et mets à jour le fichier de métadonnées et la data
 ContentModel.update = function (content, callback) {
 
-        var contentData = content.getData();
-        var metadataPath = utils.getMetaFilePath(content.id);
+    var contentData = content.getData();
+    var metadataPath = utils.getMetaFilePath(content.id);
 
-        if(!contentData || contentData.length <= 0) {
-            callback("Error updating metadata for id: " + content.id);
-        }
-
-        fs.writeFile(content.fileName, contentData);
-        fs.writeFile(metadataPath, JSON.stringify(content));
+    if (!contentData || contentData.length <= 0) {
+        callback("Error updating metadata for id: " + content.id);
+        return;
     }
+
+    fs.writeFile(content.fileName, contentData);
+    fs.writeFile(metadataPath, JSON.stringify(content));
+}
 
 // Supprime le fichier de métadonnées et le fichier de presentation
 ContentModel.deletePres = function (id, callback) {
-        fs.unlink(utils.getPresentationFilePath(id));
-        fs.unlink(utils.getMetaFilePath(content.id));
-    }
+    fs.unlink(utils.getPresentationFilePath(id));
+    fs.unlink(utils.getMetaFilePath(content.id));
+}
 
 module.exports = ContentModel; // déclaration de la classe

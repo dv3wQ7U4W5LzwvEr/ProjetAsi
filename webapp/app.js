@@ -13,20 +13,23 @@ var defaultRoute = require("./app/routes/default.route.js");
 var presentationRoute = require("./app/routes/presentation.route.js");
 var slidRoute = require("./app/routes/contents.route.js");
 
-// init server
+// Init server
 var app = express();
-
 app.use(bodyParser.json());
 
+// Configure routes
 app.use(defaultRoute);
 app.use(presentationRoute);
 app.use(slidRoute);
 
+// Routes static
 app.use("/login", express.static(path.join(__dirname, "public/login/")));
 app.use("/admin", express.static(path.join(__dirname, "public/admin/")));
 app.use("/watch", express.static(path.join(__dirname, "public/watch/")));
 
+// Start server
 var server = http.createServer(app);
 server.listen(CONFIG.port);
 
+// Start Socket.io
 IoController.listen(server);

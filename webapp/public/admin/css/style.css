@@ -1,58 +1,69 @@
-html,body {height: 100%; padding-top: 0px; overflow-x:hidden; overflow-y:hidden}
-.zeroRef{padding: 0px;margin:0px}
-.fullScreenHeight{height: 100%;}
-
-#dropZone{
-    height: 100%;
-    border-bottom-color: cornflowerblue;   
-    border-radius:1em;
-    text-align: left;
-    background-color:aliceblue;
-    margin-top: 0.5em;
+html, body {
+  height: 100%;
+  padding-top: 0px;
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
 
-.slidZoneEmpty{
-    height: 150px;
-    width: 100%;
-    border-color:rgba(169, 169, 169, 0.71);   
-    border-style: dashed;
-    border-width: medium;
-    border-radius:1em;
-    text-align: center;
-    background-color:rgba(169, 169, 169, 0.12);
+.zeroRef {
+  padding: 0px;
+  margin: 0px;
 }
 
-.slidZoneSelectedEmpty{
-    height: 150px;
-    width: 100%;
-    border-color:rgba(0, 100, 0, 0.78);   
-    border-style: dashed;
-    border-width: medium;
-    border-radius:1em;
-    text-align: center;
-    background-color:rgba(183, 255, 183, 0.62);
+.fullScreenHeight {
+  height: 100%;
 }
 
-.slidZoneSelected{
-    border-color:rgba(0, 100, 0, 0.78);   
-    border-style: dashed;
-    border-width: medium;
-    border-radius:1em;
-    text-align: center;
-/*    background-color:rgba(183, 255, 183, 0.62);*/
+#dropZone {
+  height: 100%;
+  border-bottom-color: cornflowerblue;
+  border-radius: 1em;
+  text-align: left;
+  background-color: aliceblue;
+  margin-top: 0.5em;
 }
 
-.hide{
-    visibility: hidden;
+.slidZoneEmpty {
+  height: 150px;
+  width: 100%;
+  border-color: rgba(169, 169, 169, 0.71);
+  border-style: dashed;
+  border-width: medium;
+  border-radius: 1em;
+  text-align: center;
+  background-color: rgba(169, 169, 169, 0.12);
 }
 
-.divOverflow{
-    height:100%;
-    overflow-y:auto;
+.slidZoneSelectedEmpty {
+  height: 150px;
+  width: 100%;
+  border-color: rgba(0, 100, 0, 0.78);
+  border-style: dashed;
+  border-width: medium;
+  border-radius: 1em;
+  text-align: center;
+  background-color: rgba(183, 255, 183, 0.62);
 }
 
-.contentBlock{
-    margin: 1em;
+.slidZoneSelected {
+  border-color: rgba(0, 100, 0, 0.78);
+  border-style: dashed;
+  border-width: medium;
+  border-radius: 1em;
+  text-align: center;
+}
+
+.hide {
+  visibility: hidden;
+}
+
+.divOverflow {
+  height: 100%;
+  overflow-y: auto;
+}
+
+.contentBlock {
+  margin: 1em;
 }
 
 /* DROPZONE CSS */
@@ -94,11 +105,10 @@ div.table .file-row:nth-child(odd) {
 }
 
 /* Hide the start and cancel buttons and show the delete button */
-
-#previews .file-row.dz-success .start,
-#previews .file-row.dz-success .cancel {
+#previews .file-row.dz-success .start, #previews .file-row.dz-success .cancel {
   display: none;
 }
+
 #previews .file-row.dz-success .delete {
   display: block;
 }

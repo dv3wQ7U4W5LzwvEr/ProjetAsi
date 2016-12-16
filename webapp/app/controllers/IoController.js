@@ -3,6 +3,7 @@
 // Imports
 var utils = require("../utils/utils.js");
 var ContentModel = require("../models/content.model.js");
+
 var io = require('socket.io');
 var fs = require("fs");
 
@@ -67,6 +68,7 @@ function startPresentation(presId) {
     var presPath = utils.getPresentationFilePath(presId);
     
     fs.readFile(presPath, function (err, data) {
+
         if (err) {
             console.log("Error reading presentation : " + err);
             return;
@@ -77,16 +79,17 @@ function startPresentation(presId) {
         currentSlideIndex = 0;
         sendSlideToAll(currentSlideIndex);
 
-        // Start presentation
         if (timer != null)
             clearInterval(timer);
 
+        // Start presentation
         timer = setInterval(function () {
             sendSlideToAll(currentSlideIndex + 1);
         }, 2000);
     });
 }
 
+// Update current slide index and send it to every client
 function sendSlideToAll(slideIndex) {
 
     if (currentPres == undefined || currentPres.slidArray == undefined) {
@@ -94,6 +97,7 @@ function sendSlideToAll(slideIndex) {
         return;
     }
 
+    // Update current slide index
     if (slideIndex >= 0 && slideIndex < currentPres.slidArray.length)
         currentSlideIndex = slideIndex;
     else
@@ -106,7 +110,8 @@ function sendSlideToAll(slideIndex) {
     ContentModel.read(currentSlide.contentMap[1], function (err, slid) {
         
         if(err) {
-            console.log("Error loading slide metadata : " + slid);    
+            console.log("Error loading slide metadata : " + slid);
+            return;
         }
 
         slid.src = "/contents/" + slid.id;

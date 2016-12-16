@@ -1,9 +1,11 @@
 'use strict';
 
 var CONFIG = JSON.parse(process.env.CONFIG);
-var utils = require("../utils/utils.js");
+
 var fs = require("fs");
 var path = require("path");
+
+var utils = require("../utils/utils.js");
 var ContentModel = require("./../models/content.model.js");
 
 // Retourne la liste des Contents
@@ -15,16 +17,16 @@ exports.list = function (req, res) {
         var result = {};
 
         if (err) {
-            res.end("Erreur");
+            res.end("Error listing json file from : " + CONFIG.contentDirectory);
             return;
         }
 
         files.forEach(function (file) {
-            var data = fs.readFileSync(CONFIG.contentDirectory + path.sep + file, "utf-8");
+            var data = fs.readFileSync(utils.getDataFilePath(file), "utf-8");
             var dataJson = JSON.parse(data);
 
             result[dataJson.id] = dataJson;
-        }, this);
+        });
 
         res.end(JSON.stringify(result));
     });
@@ -74,8 +76,9 @@ exports.getContent = function (req, res) {
 
             // Load image file
             fs.readFile(utils.getDataFilePath(content.fileName), function (err, content) {
-                if(err) {
+                if (err) {
                     res.end("Error reading image file: " + err);
+                    return;
                 }
 
                 res.end(content, 'binary');
