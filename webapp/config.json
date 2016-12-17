@@ -6,5 +6,6 @@
     "_COMMENT_presentationDirectory": "/home/ubuntu/Documents/project/ProjetAsi/webapp/presentation_content",
     "presentationDirectory": "D:/Site/ProjetAsi/webapp/presentation_content",
     "explain2": "contient les métadonnées en json",
+    "tempUploadDirectory":"tmp/",
     "defaultPage": "/login"
 }

@@ -13,6 +13,7 @@ function eventCtrl($scope, $log, $window, factory, comm) {
     $scope.presentationMap = {};
     $scope.presentationMap.payload = "";
 
+    // Loading images
     var available_content = comm.loadImages('', '');
     available_content.then(
         function (payload) {
@@ -23,6 +24,7 @@ function eventCtrl($scope, $log, $window, factory, comm) {
             $log.error('failure loading images', errorPayload);
         });
 
+    // Loading first presentation
     var firstPresentation = comm.loadPres('', '');
     firstPresentation.then(
         function (payload) {
@@ -41,6 +43,21 @@ function eventCtrl($scope, $log, $window, factory, comm) {
         $scope.currentPresentation.slidArray.push(slid);
     }
 
+    $scope.removeSlide = function () {
+
+        if ($scope.currentSlide == undefined) return;
+
+        for (var i = 0; i < $scope.currentPresentation.slidArray.length; i++) {
+            var elem = $scope.currentPresentation.slidArray[i];
+
+            if (elem.id == $scope.currentSlide.id) {
+                $scope.currentPresentation.slidArray.splice(i, 1);
+                $scope.currentSlide = {};
+                return;
+            }
+        }
+    }
+
     $scope.selectCurrentSlide = function (slide) {
 
         $scope.currentSlide = slide;
@@ -48,7 +65,15 @@ function eventCtrl($scope, $log, $window, factory, comm) {
 
     $scope.savePres = function () {
 
-        comm.savePres($scope.currentPresentation);
+        comm.savePres($scope.currentPresentation).then(
+            function (data) {
+                alert("Presentation saved");
+                console.log("Presentation saved : " + data);
+            },
+            function (error) {
+                alert("Error saving presentation");
+                console.log("Error saving presentation : " + error);
+            });
     }
 
     $scope.isSlideContentEmpty = function (slide) {

@@ -32,22 +32,33 @@ exports.list = function (req, res) {
     });
 }
 
-// Créé la Content dont les informations sont dans la requête
+// Créé un objet ContentModel et le stock via la méthode statique du modèle
 // nécessite header file -> pictures
 // nécessite header user -> x
-exports.create = function (req, res) {
+exports.create = function (request, res) {
     console.log("ContentController.create");
 
-    var toto;
+    var content = {};
 
-    toto.id = utiles.generateUUID();
-    toto.type = request.file.mimetype;
-    toto.title = request.file.originalname;
-    toto.fileName = request.file.path;
+    content.id = utils.generateUUID();
+    content.type = request.file.mimetype;
+    content.title = request.file.originalname;
+    content.fileName = utils.getNewFileName(content.id, request.file.originalname);
 
-    ControlModel(toto);
+    var contentModel = new ContentModel(content);
 
-    res.end();
+    // Load image file
+    var buffer = fs.readFileSync(request.file.path);
+    contentModel.setData(buffer);
+
+    ContentModel.create(contentModel, function (error, data) {
+        if (error) {
+            res.end("Error saving file on server");
+            return;
+        }
+
+        res.end("File saved");
+    });
 }
 
 // Retourne la Content avec l'ID correspondante
@@ -63,7 +74,7 @@ exports.getContent = function (req, res) {
                 return;
             }
 
-            res.end(JSON.stringify(content));
+            res.end(content.toString());
         });
     }
     else {

@@ -34,6 +34,13 @@ function commFnc($http, $q) {
 
     function savePres(pres) {
 
+        var deferred = $q.defer();
+
+        $http.post('/savePres', pres)
+            .success(function (data, status, headers, config) { deferred.resolve(data); })
+            .error(function (data, status, headers, config) { deferred.reject(status); });
+
+        return deferred.promise;
     };
 
     // Order for watcher clients
@@ -46,7 +53,7 @@ function commFnc($http, $q) {
         socket.on('connection', function () {
             socket.emit('data_comm', { 'id': comm.io.uuid });
         });
-        
+
         socket.on('newPres', function (socket) {
 
         });
@@ -61,7 +68,7 @@ function commFnc($http, $q) {
     comm.io.emitPrev = function (socket) {
         socket.emit('slidEvent', { 'CMD': "PREV" });
     }
-    
+
     comm.io.emitNext = function (socket) {
         socket.emit('slidEvent', { 'CMD': "NEXT" });
     }

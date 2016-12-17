@@ -3,13 +3,12 @@
 var express = require("express");
 var router = express.Router();
 
-var multer = require("multer");  // nécessite npm i multer
+var CONFIG = JSON.parse(process.env.CONFIG);
+
+var multer = require("multer");
+var multerMiddleware = multer({ dest: CONFIG.tempUploadDirectory });
 
 var contentController = require('../controllers/ContentController');
-
-// Si l'on voulait sécuriser les accès au service web, il faudrait communiquer le token d'identification
-// à chacune des requêtes.
-var multerMiddleware = multer({ "dest": "/tmp/" });
 
 router.route('/contents')
   .get(contentController.list)
