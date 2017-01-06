@@ -13,7 +13,7 @@ function loginCrtFnt($scope, $log, $window, auth) {
     $scope.checkUser = function (user) {
         $scope.logAuthObject(user);
 
-        auth.checkUser(user.login, user.pwd).then(function(successResult) {
+        auth.authAsk(user.login, user.pwd).then(function(successResult) {
 
             if(successResult && successResult.validAuth) {
                 if(successResult.role === "admin")
@@ -26,7 +26,6 @@ function loginCrtFnt($scope, $log, $window, auth) {
             }
         },
         function(failResult) {
-            
             alert("Connection Fail");
         });
     }

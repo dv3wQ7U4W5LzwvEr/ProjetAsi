@@ -33,10 +33,8 @@ function authFnc($http, $q) {
 
         var deferred = $q.defer();
 
-        $http.post('/fakeauthwatcher', {'login': login, 'pwd': pwd})
+        $http.post('/FrontAuthWatcherWebService/rest/WatcherAuth', {'login': login, 'pwd': pwd})
             .success(function(data, status, headers, config) {
-                //TODO Verifier si l'authentification est OK ou pas
-                //TODO S'inspirer de la methode ci-dessus 'checkUser'
                 deferred.resolve(data);
             })
             .error(function(data, status, headers, config) {
