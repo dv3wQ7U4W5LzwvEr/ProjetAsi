@@ -1,6 +1,12 @@
 # ProjetAsi
 Projet d'architecture des systèmes d'information
 
+Groupe :
+	Michael BRETON
+	Matthieu EGINARD
+	Florian VAUTARD
+	
+
 ## Réalisation
 ### Angular
 Les demandes du tp (cf: TP-ASI2-ANGULAR-stepBystep-r1.pdf) ont été satisfaites avec succès.
@@ -22,7 +28,7 @@ Les demandes du tp (cf: node.js_TP_step_by_step.pdf.pdf) ont été satisfaites a
 
 
 ### J2E
-Les demandes du tp (cf: TP-ASI2-ANGULAR-stepBystep-r1.pdf) ont été satisfaites avec succès.
+Les demandes du tp (cf: TP-ASI2-J2E-M2M-stepBystep-r1.pdf) ont été satisfaites avec succès.
 - Step 1 : Créer une servlet WatcherAuthServlet.java  ✓
 - Step 2 : compléter l’EJB session MessageSender compléter la classe afin qu’elle puisse envoyer des messages dans le bus de données ✓
 - Step 3 : Modifier le projet EJB préalablement créé afin d’obtenir la structure suivante ✓
@@ -31,10 +37,14 @@ compléter la classe afin qu’elle puisse recevoir des messages dans le bus de 
 - Step 5 : Afin de permettre à notre EJB message driven de répondre à notre Web Service une nouvel EJB Session sera créer qui enverra une réponse dans un bus de message de type Queue ✓
 - Step 6 : Compléter la classe DataContainer afin qu’elle stocke des utilisateurs (UserModel) et vérifie la validité de ces derniers (checkUser). ✓
 
+Les vidéos de démonstration sont présentes dans le dossier videos
 
 
 To test the application	
-	-> disable  Cross-Origin Request (cela permettra d'effectuer la requête post vers le serveur d'authentification)
-	-> nécessite l'installation d'une queue ([java:/jms/queue/watcherqueue]) et d'un topic ([java:/jms/watcherAuthJMS])
+	J2E
+		-> disable  Cross-Origin Request (cela permettra d'effectuer la requête post vers le serveur d'authentification)
+		-> nécessite l'installation d'une queue ([java:/jms/queue/watcherqueue]) et d'un topic ([java:/jms/watcherAuthJMS])
+		-> nécessite l'installation du connector mysql et du lien vers java:/MySqlDS
+	NodeJS
 	-> nécessite de modifier les chemins présents dans le fichier webapp/config
 	
