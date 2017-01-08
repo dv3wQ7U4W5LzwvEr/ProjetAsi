@@ -4,9 +4,8 @@ authFnc.$inject = ['$http', '$q'];
 
 function authFnc($http, $q) {
     var userMap = {};
-    userMap['jdoe'] = 'jdoepwd';
-    userMap['psmith'] = 'psmithpwd';
-    userMap['tp'] = 'tp';
+    userMap['florian'] = 'securite';
+    userMap['michael'] = 'petitchef';
 
     var fncContainer = {
         checkUser: checkUser,
@@ -20,7 +19,7 @@ function authFnc($http, $q) {
 
         setTimeout(function (login, pwd) {
             if (userMap[login] == pwd) {
-                var role = (login == 'tp') ? "admin" : "watcher";
+                var role = (login == 'michael') ? "admin" : "watcher";
                 deferred.resolve({login:login, validAuth:true, role:role});
             } else {
                 deferred.reject({login:login, validAuth:false, role:null});

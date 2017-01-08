@@ -35,3 +35,6 @@ compléter la classe afin qu’elle puisse recevoir des messages dans le bus de 
 
 To test the application	
 	-> disable  Cross-Origin Request (cela permettra d'effectuer la requête post vers le serveur d'authentification)
+	-> nécessite l'installation d'une queue ([java:/jms/queue/watcherqueue]) et d'un topic ([java:/jms/watcherAuthJMS])
+	-> nécessite de modifier les chemins présents dans le fichier webapp/config
+	

@@ -1,10 +1,10 @@
 {
     "port": 1337,
     "_COMMENT_contentDirectory": "/home/ubuntu/Documents/project/ProjetAsi/webapp/uploads",
-    "contentDirectory": "D:/Site/ProjetAsi/webapp/uploads",
+    "contentDirectory": "D:/florian/1_ecole/4_CPE/annee_3/ProjetAsi/webapp/uploads",
     "explain": "contient les données et les métadonnées des slides comme les images",
     "_COMMENT_presentationDirectory": "/home/ubuntu/Documents/project/ProjetAsi/webapp/presentation_content",
-    "presentationDirectory": "D:/Site/ProjetAsi/webapp/presentation_content",
+    "presentationDirectory": "D:/florian/1_ecole/4_CPE/annee_3/ProjetAsi/webapp/presentation_content",
     "explain2": "contient les métadonnées en json",
     "tempUploadDirectory":"tmp/",
     "defaultPage": "/login"
