@@ -6,11 +6,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-/**
- * @author ubuntu
- *
- */
-@Path("/hello")
+@Path("/test/")
 public interface IHelloWord {
 	
 	@GET

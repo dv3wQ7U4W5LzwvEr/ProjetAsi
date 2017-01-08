@@ -12,34 +12,30 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "users")
-
 public class UserModel implements Serializable {
 
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "usr_id")
     private int id;
 
     @NotNull
-    @Column(name = "login", unique = true)
+    @Column(name = "usr_login", unique = true)
     private String login;
 
     @NotNull
-    @Column(name = "password")
+    @Column(name = "usr_password")
     private String password;
 
-    @Column(name = "firstName")
+    @Column(name = "usr_firstName")
     private String firstName;
 
-    @Column(name = "lastName")
+    @Column(name = "usr_lastName")
     private String lastName;
 
-    @Column(name = "role")
+    @Column(name = "usr_role")
     private String role;
     
     public UserModel() {

@@ -30,3 +30,8 @@ Les demandes du tp (cf: TP-ASI2-ANGULAR-stepBystep-r1.pdf) ont été satisfaites
 compléter la classe afin qu’elle puisse recevoir des messages dans le bus de données ✓
 - Step 5 : Afin de permettre à notre EJB message driven de répondre à notre Web Service une nouvel EJB Session sera créer qui enverra une réponse dans un bus de message de type Queue ✓
 - Step 6 : Compléter la classe DataContainer afin qu’elle stocke des utilisateurs (UserModel) et vérifie la validité de ces derniers (checkUser). ✓
+
+
+
+To test the application	
+	-> disable  Cross-Origin Request (cela permettra d'effectuer la requête post vers le serveur d'authentification)

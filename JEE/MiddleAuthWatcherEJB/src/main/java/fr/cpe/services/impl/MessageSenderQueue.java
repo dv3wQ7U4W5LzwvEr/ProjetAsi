@@ -7,12 +7,10 @@ import javax.inject.Inject;
 import javax.jms.JMSContext;
 import javax.jms.Queue;
 
+import fr.cpe.model.AuthModel;
 import fr.cpe.model.UserModel;
 import fr.cpe.services.MessageSenderQueueLocal;
 
-/**
- * Session Bean implementation class MessageSenderQueue
- */
 @Stateless
 @LocalBean
 public class MessageSenderQueue implements MessageSenderQueueLocal {
@@ -29,5 +27,9 @@ public class MessageSenderQueue implements MessageSenderQueueLocal {
 	
 	public void sendMessage(UserModel user) {
 		context.createProducer().send(queue, user);
+	}
+
+	public void sendMessage(AuthModel authResponseModel) {
+		context.createProducer().send(queue, authResponseModel);
 	}
 }

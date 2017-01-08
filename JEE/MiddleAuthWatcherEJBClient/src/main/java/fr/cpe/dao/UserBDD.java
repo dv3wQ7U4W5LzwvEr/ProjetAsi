@@ -8,7 +8,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 import fr.cpe.model.UserModel;
-import fr.cpe.services.MessageReceiverSyncLocal;
+import fr.cpe.services.MessageReceiverSyncLocalUserModel;
 
 @Stateless
 public class UserBDD implements IUserBDD{
@@ -16,21 +16,25 @@ public class UserBDD implements IUserBDD{
     @PersistenceContext
     private EntityManager entityManager;
 
-    Logger logger = Logger.getLogger(MessageReceiverSyncLocal.class.getName());
+    Logger logger = Logger.getLogger(MessageReceiverSyncLocalUserModel.class.getName());
 	
 	public UserModel checkUserBDD (UserModel user){
 		
 		UserModel userResponse = null;
+
 		try{
-			userResponse = (UserModel)entityManager.createQuery("from UserModel u where u.login = :login AND u.password = :password")
+			userResponse = (UserModel) entityManager.createQuery("from UserModel u where u.login = :login AND u.password = :password")
 					.setParameter("login", user.getLogin())
 					.setParameter("password", user.getPassword())
 					.getSingleResult();
-					
-		} catch (NoResultException nre) {
-			logger.info("NoResultException UserBDD : pas de user");
-
 		}
+		catch (NoResultException nre) {
+			logger.info("NoResultException UserBDD : pas de user");
+		}
+
+		if (userResponse != null)
+			System.out.println(userResponse);
+
 		return userResponse;
 	}
 }

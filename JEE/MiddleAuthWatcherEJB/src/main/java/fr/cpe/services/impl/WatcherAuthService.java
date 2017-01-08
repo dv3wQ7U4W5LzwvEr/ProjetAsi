@@ -2,6 +2,7 @@ package fr.cpe.services.impl;
 
 import javax.ejb.Stateless;
 
+import fr.cpe.model.AuthModel;
 import fr.cpe.model.UserModel;
 import fr.cpe.services.IWatcherAuthService;
 
@@ -9,9 +10,7 @@ import fr.cpe.services.IWatcherAuthService;
 public class WatcherAuthService implements IWatcherAuthService{
 
 	@Override
-	public UserModel watcherAuthServiceQuery(UserModel user) {
-		user.setFirstName("Mouchou");
-		user.setLastName("Sabbioni");
+	public AuthModel watcherAuthServiceQuery(AuthModel user) {
 		return user;
 	}
 	

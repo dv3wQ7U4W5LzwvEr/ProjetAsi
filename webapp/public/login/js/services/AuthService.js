@@ -10,6 +10,7 @@ function authFnc($http, $q) {
 
     var fncContainer = {
         checkUser: checkUser,
+		authAsk: authAsk,
         userList: userList
     };
 
@@ -32,8 +33,15 @@ function authFnc($http, $q) {
     function authAsk(login,pwd) {
 
         var deferred = $q.defer();
-
-        $http.post('/FrontAuthWatcherWebService/rest/WatcherAuth', {'login': login, 'pwd': pwd})
+		var req = {
+		 method: 'POST',
+		 url: 'http://localhost:8080/FrontAuthWatcherWebService/rest/userInformation',
+		 headers: {
+		   'Content-Type': 'application/json'
+		 },
+		 data:  {'login': login, 'password': pwd}
+		}
+        $http(req)
             .success(function(data, status, headers, config) {
                 deferred.resolve(data);
             })

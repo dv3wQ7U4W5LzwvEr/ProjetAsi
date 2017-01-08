@@ -12,9 +12,9 @@ import javax.jms.ObjectMessage;
 import javax.jms.TextMessage;
 
 import fr.cpe.dao.UserBDD;
+import fr.cpe.model.AuthModel;
 import fr.cpe.model.UserModel;
 import fr.cpe.services.MessageSenderQueueLocal;
-
 
 
 @MessageDriven(
@@ -42,29 +42,33 @@ public class AuthWatcherMsgDrivenEJB implements MessageListener {
 				System.out.println("Topic: J'ai recu un message à "+ new Date());
 				TextMessage msg = (TextMessage) message;
 				System.out.println("Le message est : " + msg.getText());
-				
-			} else if (message instanceof ObjectMessage) {
-				System.out.println("Topic: J'ai recu un message à "	
-						+ new Date());
-					ObjectMessage msg = (ObjectMessage) message;
+			}
+			else if (message instanceof ObjectMessage) {
+				System.out.println("Topic: J'ai recu un message à "	+ new Date());
+				ObjectMessage msg = (ObjectMessage) message;
+
 				if( msg.getObject() instanceof UserModel){
 					UserModel user=(UserModel)msg.getObject();
-					System.out.println("User Details: ");
-					System.out.println("login:"+user.getLogin());
-					System.out.println("pwd:"+user.getPassword());
 					UserModel currentTestRole=userBDD.checkUserBDD(user);
-				if( currentTestRole.getRole() == null || currentTestRole.getRole().isEmpty()){
-					sender.sendMessage(user);
-				}else{
-					user.setRole(currentTestRole.getRole());
-					sender.sendMessage(user);
+					AuthModel response = new AuthModel();
+
+					if( currentTestRole.getRole() == null || currentTestRole.getRole().isEmpty()){
+						response.setLogin(user.getLogin());
+						response.setRole(null);
+						response.setValidAuth(false);
+					}else{
+						response.setLogin(user.getLogin());
+						response.setRole(currentTestRole.getRole());
+						response.setValidAuth(true);
 					}
+					sender.sendMessage(response);
 				}
-			} else {
-			System.out.println("Message non valide pour cette Queue MDB");
+			}
+			else {
+				System.out.println("Message non valide pour cette Queue MDB");
 			}
 		} catch (JMSException e) {
 			e.printStackTrace();
-			}
+		}
 	}
 }
